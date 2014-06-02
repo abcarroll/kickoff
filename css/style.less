@@ -1,0 +1,26 @@
+// Kickoff - the magic happens here
+
+// Include bootstrap base.  This will also include a base variables.less
+@import "bootstrap/bootstrap.less";
+
+// Include the bootswatch theme's variables.less and bootswatch.less
+// bootswatch.less is equiv. to it's own custom.css which includes
+// customizations not possible with variables alone.
+@import "bootswatch/cerulean/variables.less";
+@import "bootswatch/cerulean/bootswatch.less";
+
+// These are your own files to modify and update as you see fit.  Note if
+// you generate a FULL variables.less from Twitter's online generator, it
+// WILL overwrite Bootswatch's.  Instead, pick and choose individual
+// customizations if this is an issue.
+@import "variables.less";
+@import "custom.less";
+
+// Do not remove it unless you are sure.
+// See this URL for further reading on why this is re-included.
+// http://coding.smashingmagazine.com/2013/03/12/customizing-bootstrap/
+@import "bootstrap/utilities.less";
+
+// Remember this file is meant for development and demos only!  You should
+// use a real less compiler against this file and generate a compiled and
+// minimized version of your CSS before deployment.
