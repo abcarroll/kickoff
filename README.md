@@ -6,7 +6,7 @@ Kickoff is an amalgamation between:
 * Verekia's Initializr: HTML5BoilerPlate + HTML5Shiv, Modernizr, jQuery, Respond.js (some optional). [http://www.initializr.com/]
 * Twitter Bootstrap: LESS version + Example Set with Modifications to work with Less.js [http://getbootstrap.com/]
 * Bootswatch: A number of Bootstrap Themes, LESS Files [http://bootswatch.com/]
-* Less.js: LESS Javascript Compiler for browsers [??]
+* Less.js: LESS Javascript Compiler for browsers [http://lesscss.org/]
 * My own 'style.less' and methodology.
 
 ##What is this stuff?
@@ -31,7 +31,7 @@ Also included is `./build.sh` which I used to automate the entire process from s
 
 ##Credit Due
 * Bootstrap LESS + Javascript.  MIT License.  
-* Bootstrap `examples/`: From Bootstrap Docs, and is probably licesned separately under the CC BY 3.0 License.  The .html files under examples/ *are modified* to use Less.js instead of a stock bootstrap.min.css.
+* Bootstrap `examples/`: From Bootstrap Docs, and is probably licensed separately under the CC BY 3.0 License.  The .html files under examples/ *are modified* to use Less.js instead of a stock bootstrap.min.css.
 * Some files distributed by, and possibly modified and/or compiled by Initializr.  No license stated. 
 * HTML5Boilerplate.  MIT License.
 * jQuery. MIT License.
