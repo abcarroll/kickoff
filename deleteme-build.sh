@@ -38,7 +38,7 @@
 # - More options in regards to git repo's vs plain files (most from Github
 #   still, but not git repos).  The Bootswatch repo is rather large, possibly
 #   fetch via URL alternatively.
-# - Currently fonts and the bootstrap.min.js are not being replaced with the 
+# - Currently fonts and are not being replaced with the 
 #   repo's versions.   This is OK because right now they are exactly the same
 #   but this might change in the future, especially just-after a new bootstrap
 #   release before initializr has a chance to catch up.
@@ -205,7 +205,7 @@ for working_file in initializr-*.html; do
   # Changes 'Project Name' to 'Kickoff'
   perl -p -i'' -e "s#Project name#AB's Kickoff#" "$working_file"
   # And links the large button to "examples"
-  perl -p -i'' -e 's#<a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a>#<a class="btn btn-primary btn-lg" role="button" href="/examples/">View More Twitter Examples &raquo;</a>#' "$working_file"
+  perl -p -i'' -e 's#<a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a>#<a class="btn btn-primary btn-lg" role="button" href="./examples/index.html">View More Bootstrap Examples &raquo;</a>#' "$working_file"
 done
 
 echo "Converting twitter bootstrap examples to use less.js and fixing favicons.."
@@ -275,5 +275,8 @@ echo "Generating HTML Index Files with 'tree' utility..."
 echo "(It's OK if this fails, just use autoindexing or equiv.)"
 tree -r -H "." | perl -p -e "s#Directory Tree#AB's Kickoff Directory Tree#" > index.html
 tree -H "." -P "*.html" examples/ | perl -p -e 's#Directory Tree#Twitter Bootstrap Example Files#' > examples/index.html
+
+# This .htaccess can cause 500 Errors on servers without AllowOverride All
+mv .htaccess demo.htaccess
 
 echo "Complete!"
