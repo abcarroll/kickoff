@@ -23,19 +23,27 @@
 
 # ------------------------------------------------------------------------------
 
-# TODO
+# TODO / Roadmap: 
+# - Clean up startup -- the intro text is a bit harsh.
 # - Unpacking and rm'ing should always occur in a tmp/ dir -- output to a
-#   subdirectory, so this will be 'safe'.
+#   subdirectory, so it will mitigate issues from improper running or bugs in
+#   the script.
 # - Be able to reuse unzipped bootstrap, bootswatch, etc -- check for existence
 #   prior to re-downloading & unpacking
-# - Possibly make initializr customizable from a stdin prompt
+# - Make entire process customizable from a stdin prompt.  Be able to use
+#   this script for compiling an intial Kickoff as well as select the target 
+#   variant you wish to use (i.e., remove all but one initializr-* file, and
+#   the three .js files that would no longer be used, depending on variant)
 # - Replace wget calls with a function that can select either wget or curl.
 # - More options in regards to git repo's vs plain files (most from Github
 #   still, but not git repos).  The Bootswatch repo is rather large, possibly
 #   fetch via URL alternatively.
+# - Currently fonts and the bootstrap.min.js are not being replaced with the 
+#   repo's versions.   This is OK because right now they are exactly the same
+#   but this might change in the future, especially just-after a new bootstrap
+#   release before initializr has a chance to catch up.
 # - Options regarding Less.js, Bootstrap, and Bootswatch HEAD vs Stable, etc.
 # - Method for selection of jQuery version -- update jQuery, regardless!
-# - Clean up startup -- the intro text is a bit harsh.
 
 url_lessjs=https://raw.github.com/less/less.js/master/dist/less-1.7.0.min.js
 url_bootstrap=https://github.com/twbs/bootstrap/archive/v3.1.1.zip
@@ -142,8 +150,13 @@ rm $verbose_switch bootstrap.zip
 echo "Moving bootstrap's less files into css/bootstrap/"
 mv $verbose_switch bootstrap-*/less/ css/bootstrap/
 
+echo "Making sure bootstrap's .js is up-to-date"
+mv $verbose_switch bootstrap-*/dist/js/*.js js/vendor/
+
 echo "Moving examples into a different directory structure."
 mkdir $verbose_switch examples/
+mv $verbose_switch bootstrap-*/docs/assets/js/docs.min.js examples/
+mv $verbose_switch bootstrap-*/docs/assets/js/vendor/holder.js examples/
 for example_dir in bootstrap-*/docs/examples/*/; do
   exname=$(basename "$example_dir")
 	if [ -f "$example_dir/index.html" ]; then
@@ -190,10 +203,12 @@ for working_file in initializr-*.html; do
   # Removes some junk lines no longer needed  
   perl -p -i'' -e 's#\s+<link rel="stylesheet" href="css/main\.css">\r?\n|\s+<link rel="stylesheet" href="css/bootstrap-theme.min.css">\r?\n##' "$working_file"
   # Changes 'Project Name' to 'Kickoff'
-  #perl -p -i'' -e "s#Project name#AB's Kickoff#" "$working_file"
+  perl -p -i'' -e "s#Project name#AB's Kickoff#" "$working_file"
+  # And links the large button to "examples"
+  perl -p -i'' -e 's#<a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a>#<a class="btn btn-primary btn-lg" role="button" href="/examples/">View More Twitter Examples &raquo;</a>#' "$working_file"
 done
 
-echo "Converting twitter bootstrap to use less.js and fixing favicons.."
+echo "Converting twitter bootstrap examples to use less.js and fixing favicons.."
 for working_file in examples/*.html; do
   # Updates stylesheets to proper less.js sheet
   perl -p -i'' -e 's#(\s+)<link href="../../dist/css/bootstrap\.min\.css" rel="stylesheet">(\r?\n)#$1<link rel="stylesheet/less" type="text/css" href="../css/style.less">$2$1<script src="../js/vendor/less.min.js"></script>$2$2#' "$working_file"
@@ -205,7 +220,7 @@ for working_file in examples/*.html; do
   perl -p -i'' -e 's#\s+<!-- Just for debugging purposes\. Don.t actually copy this line! -->\r?\n|\s+<!--\[if lt IE 9\]><script src="\.\./\.\./assets/js/ie8-responsive-file-warning\.js"></script><!\[endif\]-->\r?\n##' "$working_file"
   # We don't need to load this from a CDN, we already have this locally:
   perl -p -i'' -e 's#<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>#<script src="../js/vendor/jquery-1.11.0.min.js"></script>#' "$working_file"
-  
+  perl -p -i'' -e 's#<script src="../../assets/js/docs.min.js"></script>#<script src="./docs.min.js"></script>#' "$working_file"
 done
 
 # Static File Handling ---------------------------
