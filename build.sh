@@ -239,8 +239,13 @@ echo "// Kickoff - the magic happens here
 // Include the bootswatch theme's variables.less and bootswatch.less
 // bootswatch.less is equiv. to it's own "custom.css" which includes
 // customizations not possible with variables alone.
-@import \"bootswatch/cerulean/variables.less\";
-@import \"bootswatch/cerulean/bootswatch.less\";
+// The default here is 'cosmo', out of the stock Bootswatch themes of:
+// amelia cerulean cosmo custom cyborg darkly flatly journal lumen
+// readable simplex slate spacelab superhero united yeti
+// You might also be interested in the Bootswatchlet, available near
+// the bottom of this URL: http://bootswatch.com/help/
+@import \"bootswatch/cosmo/variables.less\";
+@import \"bootswatch/cosmo/bootswatch.less\";
 
 // These are your own files to modify and update as you see fit.  Note if
 // you generate a FULL variables.less from Twitter's online generator, it
@@ -268,7 +273,7 @@ rm $verbose_switch css/*.css css/*.css.map;
 # TODO tree is pretty nonstandard, make sure it exists
 echo "Generating HTML Index Files with 'tree' utility..."
 echo "(It's OK if this fails, just use autoindexing or equiv.)"
-tree -H "." | perl -p -e "s#Directory Tree#AB's Kickoff Directory Tree#" > index.html
-tree -r -H "." -P "*.html" examples/ | perl -p -e 's#Directory Tree#Twitter Bootstrap Example Files#' > examples/index.html
+tree -r -H "." | perl -p -e "s#Directory Tree#AB's Kickoff Directory Tree#" > index.html
+tree -H "." -P "*.html" examples/ | perl -p -e 's#Directory Tree#Twitter Bootstrap Example Files#' > examples/index.html
 
 echo "Complete!"
