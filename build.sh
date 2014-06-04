@@ -148,7 +148,7 @@ echo "Removing Archive"
 rm $verbose_switch bootstrap.zip
 
 echo "Moving bootstrap's less files into css/bootstrap/"
-mv $verbose_switch bootstrap-*/less/ css/bootstrap/
+mv $verbose_switch bootstrap-*/less/*.* css/bootstrap/
 
 echo "Making sure bootstrap's .js is up-to-date"
 mv $verbose_switch bootstrap-*/dist/js/*.js js/vendor/
@@ -264,5 +264,11 @@ echo '// YOUR CUSTOM CSS/LESS GOES HERE' > css/custom.less
 
 echo "Cleaning up old CSS files to prevent confusion"
 rm $verbose_switch css/*.css css/*.css.map;
+
+# TODO tree is pretty nonstandard, make sure it exists
+echo "Generating HTML Index Files with 'tree' utility..."
+echo "(It's OK if this fails, just use autoindexing or equiv.)"
+tree -H "." | perl -p -e "s#Directory Tree#AB's Kickoff Directory Tree#" > index.html
+tree -r -H "." -P "*.html" examples/ | perl -p -e 's#Directory Tree#Twitter Bootstrap Example Files#' > examples/index.html
 
 echo "Complete!"
