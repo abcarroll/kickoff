@@ -221,6 +221,8 @@ for working_file in examples/*.html; do
   # We don't need to load this from a CDN, we already have this locally:
   perl -p -i'' -e 's#<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>#<script src="../js/vendor/jquery-1.11.0.min.js"></script>#' "$working_file"
   perl -p -i'' -e 's#<script src="../../assets/js/docs.min.js"></script>#<script src="./docs.min.js"></script>#' "$working_file"
+  # Changes 'Project Name' to 'Kickoff' (same as above)
+  perl -p -i'' -e "s#Project name#AB's Kickoff#" "$working_file"
 done
 
 # Static File Handling ---------------------------
