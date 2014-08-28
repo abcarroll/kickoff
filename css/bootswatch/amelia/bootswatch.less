@@ -1,4 +1,4 @@
-// Amelia 3.1.1
+// Amelia 3.2.0
 // Bootswatch
 // -----------------------------------------------------
 
@@ -76,7 +76,7 @@
 table,
 .table {
 
-  a {
+  a:not(.btn) {
     color: #fff;
     text-decoration: underline;
   }
@@ -98,6 +98,10 @@ legend {
   color: #fff;
 }
 
+.input-group-addon {
+  color: @btn-default-color;
+}
+
 .has-warning {
   .help-block,
   .control-label,
@@ -108,6 +112,10 @@ legend {
   .form-control,
   .form-control:focus {
     border-color: lighten(@brand-warning, 20%);
+  }
+
+  .input-group-addon {
+    border: none;
   }
 }
 
@@ -122,6 +130,10 @@ legend {
   .form-control:focus {
     border-color: lighten(@brand-primary, 40%);
   }
+
+  .input-group-addon {
+    border: none;
+  }
 }
 
 .has-success {
@@ -135,10 +147,10 @@ legend {
   .form-control:focus {
     border-color: lighten(@brand-success, 20%);
   }
-}
 
-.input-group-addon {
-  color: @btn-default-color;
+  .input-group-addon {
+    border: none;
+  }
 }
 
 // Navs =======================================================================
@@ -176,8 +188,4 @@ a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
   border-color: @thumbnail-border;
-}
-
-.popover {
-  color: @gray-dark;
 }

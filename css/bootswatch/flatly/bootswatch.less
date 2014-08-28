@@ -1,4 +1,4 @@
-// Flatly 3.1.1
+// Flatly 3.2.0
 // Bootswatch
 // -----------------------------------------------------
 
@@ -72,7 +72,7 @@
 table,
 .table {
 
-  a {
+  a:not(.btn) {
     text-decoration: underline;
   }
 
@@ -209,24 +209,23 @@ input, {
 
 // Indicators =================================================================
 
+.close {
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.4;
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    opacity: 1;
+  }
+}
+
 .alert {
 
-  a,
   .alert-link {
     color: #fff;
     text-decoration: underline;
-  }
-
-  .close {
-    color: #fff;
-    text-decoration: none;
-    opacity: 0.4;
-
-    &:hover,
-    &:focus {
-      color: #fff;
-      opacity: 1;
-    }
   }
 }
 
@@ -245,4 +244,22 @@ input, {
 
 .well {
   .box-shadow(none);
+}
+
+.panel {
+  &-default {
+    .close {
+      color: @text-color;
+    }
+  }
+}
+
+.modal {
+  .close {
+    color: @text-color;
+  }
+}
+
+.popover {
+  color: @text-color;
 }
