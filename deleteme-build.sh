@@ -45,8 +45,8 @@
 # - Options regarding Less.js, Bootstrap, and Bootswatch HEAD vs Stable, etc.
 # - Method for selection of jQuery version -- update jQuery, regardless!
 
-url_lessjs=https://raw.github.com/less/less.js/master/dist/less-1.7.0.min.js
-url_bootstrap=https://github.com/twbs/bootstrap/archive/v3.1.1.zip
+url_lessjs=https://raw.githubusercontent.com/less/less.js/master/dist/less.min.js
+url_bootstrap=https://github.com/twbs/bootstrap/archive/master.zip
 git_bootswatch=https://github.com/thomaspark/bootswatch
 
 # # # # # # # - - # # # # # # #
@@ -148,7 +148,10 @@ echo "Removing Archive"
 rm $verbose_switch bootstrap.zip
 
 echo "Moving bootstrap's less files into css/bootstrap/"
-mv $verbose_switch bootstrap-*/less/*.* css/bootstrap/
+mkdir $verbose_switch css/bootstrap/
+mkdir $verbose_switch css/bootstrap/mixins/
+mv $verbose_switch bootstrap-*/less/*.less css/bootstrap/
+mv $verbose_switch bootstrap-*/less/mixins/*.less css/bootstrap/mixins/
 
 echo "Making sure bootstrap's .js is up-to-date"
 mv $verbose_switch bootstrap-*/dist/js/*.js js/vendor/
@@ -219,7 +222,7 @@ for working_file in examples/*.html; do
   # Removes this, who the hell uses IE8 to test their software?  We aren't including this .js ...
   perl -p -i'' -e 's#\s+<!-- Just for debugging purposes\. Don.t actually copy this line! -->\r?\n|\s+<!--\[if lt IE 9\]><script src="\.\./\.\./assets/js/ie8-responsive-file-warning\.js"></script><!\[endif\]-->\r?\n##' "$working_file"
   # We don't need to load this from a CDN, we already have this locally:
-  perl -p -i'' -e 's#<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>#<script src="../js/vendor/jquery-1.11.0.min.js"></script>#' "$working_file"
+  perl -p -i'' -e 's#<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>#<script src="../js/vendor/jquery-1.11.1.min.js"></script>#' "$working_file"
   perl -p -i'' -e 's#<script src="../../assets/js/docs.min.js"></script>#<script src="./docs.min.js"></script>#' "$working_file"
   # Changes 'Project Name' to 'Kickoff' (same as above)
   perl -p -i'' -e "s#Project name#AB's Kickoff#" "$working_file"
