@@ -77,7 +77,7 @@ initializr_variants=(html5shiv html5shiv-respond modernizr modernizr-respond);
 
 # It is possible to tell which are themes with some work, but it's easier just
 # to include a static list. Make sure this is up to date!
-bootswatch_themes=(amelia cerulean cosmo custom cyborg darkly flatly journal lumen readable simplex slate spacelab superhero united yeti);
+bootswatch_themes=(cerulean cosmo custom cyborg darkly flatly journal lumen paper readable sandstone simplex slate spacelab superhero united yeti);
 
 # Passes this flag to mkdir, mv, and rm operations.  Can set to blank to make
 # it less verbose or set to -v for lots of verbosity
